@@ -82,5 +82,11 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PointClassLibrary\PointClassLibrary.csproj">
+      <Project>{956b78fe-eb72-4385-8236-fa0c5cc504ee}</Project>
+      <Name>PointClassLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

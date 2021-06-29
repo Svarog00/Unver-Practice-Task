@@ -16,6 +16,6 @@
             </Canvas>
         </ScrollViewer>
         <Slider x:Name="slider" Grid.Column="1" Orientation="Horizontal"
-                Minimum="1" Maximum="100" Value="1" MouseWheel="slider_MouseWheel"/>
+                Minimum="0.1" Maximum="100" Value="1" MouseWheel="slider_MouseWheel"/>
     </Grid>
 </UserControl>

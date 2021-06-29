@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace PracticeTask
 {
     partial class Form1 : Form
@@ -37,9 +38,7 @@ namespace PracticeTask
                 {
                     TableInput();
                 }
-                //_graphForm = new Form2();
-                //_graphForm.DrawGraphic(_points);
-                _graphicCanvas.SetData(_points, 25);
+                _graphicCanvas.SetData(_points);
                 _graphicCanvas.Draw();
                 _graphicDrawn = true;
             }
@@ -59,7 +58,6 @@ namespace PracticeTask
                     {
                         TableInput();
                     }
-                    //_graphForm.RedrawGraphic(_points);
                     _graphicCanvas.SetData(_points);
                     _graphicCanvas.Draw();
                 }
@@ -92,6 +90,8 @@ namespace PracticeTask
                 AdjustBorders();
                 _points.FormListFromTable(valuesTable, _leftBorder, _rightBorder);
             }
+
+            _points.Sort();
         }
         //Проверка на то, чтобы не было несколько иксов. На вход получает индекс строки, в которой происходит изменение
         private void CheckXs(int index)

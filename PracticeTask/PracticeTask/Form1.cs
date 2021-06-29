@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PointClassLibrary;
 
 namespace PracticeTask
 {
@@ -21,7 +22,7 @@ namespace PracticeTask
         private double _leftBorder = double.NaN;
         private double _rightBorder = double.NaN;
 
-        private List<System.Windows.Point> _points = new List<System.Windows.Point>();
+        private List<DependentPoint> _points = new List<DependentPoint>();
 
         public Form1()
         {

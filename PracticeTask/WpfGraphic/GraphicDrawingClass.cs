@@ -12,12 +12,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PointClassLibrary;
 
 namespace WpfGraphic
 {
     public partial class UserControl1 : UserControl
     {
-        private List<Point> _points;
+        private List<DependentPoint> _points;
 
         private double _yAxis;
         private double _xAxis;

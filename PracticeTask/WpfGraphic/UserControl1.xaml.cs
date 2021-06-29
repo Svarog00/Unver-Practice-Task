@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PointClassLibrary;
 
 namespace WpfGraphic
 {
@@ -32,13 +33,12 @@ namespace WpfGraphic
             InitializeComponent();
             _yAxis = canvasForGraph.Height / 2;
             _xAxis = canvasForGraph.Width / 2;
-            _scale = 20; //100% = 25; 1% = 0.25
+            _scale = 5;
         }
 
-        public void SetData(List<Point> points, float scale = 20)
+        public void SetData(List<DependentPoint> points)
         {
             _points = points;
-            _scale = scale;
         }
 
         #region MovingByMouse
@@ -67,7 +67,12 @@ namespace WpfGraphic
 
         private void slider_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            slider.Value += e.Delta / 100;
+            //slider.Value += e.Delta / 100;
+            if(_scale + e.Delta / 100 >= 0)
+            {
+                _scale += e.Delta / 100;
+            }
+            Draw();
         }
     }
 }
