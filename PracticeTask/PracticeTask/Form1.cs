@@ -13,21 +13,15 @@ namespace PracticeTask
 {
     public partial class Form1 : Form
     {
-        //private Form2 _graphForm;
-
-        private bool _formulaInput;
-        private bool _tableInput;
-        private bool _graphicDrawn = false;
-
-        private double _leftBorder = double.NaN;
-        private double _rightBorder = double.NaN;
-
         private List<DependentPoint> _points = new List<DependentPoint>();
+
+        private Color _color = Color.Black;
+
+        private Serialization _serializator;
 
         public Form1()
         {
             InitializeComponent();
-            //_graphForm = new Form2();
             Text = "Форма ввода";
             valuesTable.Columns.Add("-", "x");
             valuesTable.Columns.Add("-", "y");
@@ -36,6 +30,9 @@ namespace PracticeTask
             _tableInput = tableRadioButton.Checked;
 
             SwitchVisibility();
+            _graphicCanvas.OnPointPositionCorrected += _graphicCanvas_OnPointPositionCorrected;
+
+            _serializator = new Serialization();
         }
 
         private void tableRadioButton_CheckedChanged(object sender, EventArgs e) //Переключение видимости таблицы
@@ -88,6 +85,21 @@ namespace PracticeTask
         {
             if (rightBorderTextBox.Text.Length > 0 && leftBorderTextBox.Text.Length > 0)
                 Rebuild();
+        }
+
+        private void colorChangeButton_Click(object sender, EventArgs e)
+        {
+            ChangeColor();
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFile();
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadFromFile();
         }
     }
 }

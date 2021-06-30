@@ -18,12 +18,26 @@ namespace WpfGraphic
 {
     public partial class UserControl1 : UserControl
     {
-        private List<DependentPoint> _points;
+        private List<DependentPoint> _points = new List<DependentPoint>();
 
         private double _yAxis;
         private double _xAxis;
 
         private float _scale;
+
+        private Color _graphicColor = Colors.Black;
+
+        public void SetData(List<DependentPoint> points)
+        {
+            _points = points;
+            _graphicColor = Colors.Black;
+        }
+
+        public void SetData(List<DependentPoint> points, byte r, byte g, byte b)
+        {
+            _points = points;
+            _graphicColor = Color.FromRgb(r, g, b);
+        }
 
         public void Draw()
         {
@@ -34,25 +48,46 @@ namespace WpfGraphic
 
         private void DrawAxles()
         {
+            double delta = 1.25 * _scale;
             //Y axis
-            Line yAxis = new Line();
-            yAxis.Y1 = 0;
-            yAxis.Y2 = canvasForGraph.Height;
-            yAxis.X1 = canvasForGraph.Width / 2;
-            yAxis.X2 = canvasForGraph.Width / 2;
-            yAxis.Stroke = new SolidColorBrush(Colors.Black);
-            yAxis.StrokeThickness = 1;
+            double width = 0;
+            while (width < canvasForGraph.Width)
+            {
+                Line yAxis = new Line();
+                yAxis.Y1 = 0;
+                yAxis.Y2 = canvasForGraph.Height;
+                //yAxis.X1 = canvasForGraph.Width / 2;
+                //yAxis.X2 = canvasForGraph.Width / 2;
+                yAxis.X1 = width;
+                yAxis.X2 = width;
+                if (width == canvasForGraph.Height / 2)
+                    yAxis.Stroke = new SolidColorBrush(Colors.Black);
+                else
+                    yAxis.Stroke = new SolidColorBrush(Colors.Gray);
+                yAxis.StrokeThickness = 1;
+                width += delta;
+                canvasForGraph.Children.Add(yAxis);
+            }
             //X axis
-            Line xAxis = new Line();
-            xAxis.Y1 = canvasForGraph.Height / 2;
-            xAxis.Y2 = canvasForGraph.Height / 2;
-            xAxis.X1 = 0;
-            xAxis.X2 = canvasForGraph.Width;
-            xAxis.Stroke = new SolidColorBrush(Colors.Black);
-            xAxis.StrokeThickness = 1;
-
-            canvasForGraph.Children.Add(xAxis);
-            canvasForGraph.Children.Add(yAxis);
+            double height = 0;
+            while (height < canvasForGraph.Height)
+            {
+                Line xAxis = new Line();
+                //xAxis.Y1 = canvasForGraph.Height / 2;
+                //xAxis.Y2 = canvasForGraph.Height / 2;
+                xAxis.Y1 = height;
+                xAxis.Y2 = height;
+                
+                xAxis.X1 = 0;
+                xAxis.X2 = canvasForGraph.Width;
+                if(height == canvasForGraph.Height / 2)
+                    xAxis.Stroke = new SolidColorBrush(Colors.Black);
+                else
+                    xAxis.Stroke = new SolidColorBrush(Colors.Gray);
+                xAxis.StrokeThickness = 0.5;
+                height += delta;
+                canvasForGraph.Children.Add(xAxis);
+            }
         }
 
         private void DrawPoints()
@@ -68,7 +103,7 @@ namespace WpfGraphic
                 elipse.Height = _scale / 5;
 
                 elipse.StrokeThickness = 2;
-                elipse.Stroke = Brushes.Black;
+                elipse.Stroke = new SolidColorBrush(_graphicColor);
                 elipse.Margin = new Thickness(pointsToDraw[i].X, pointsToDraw[i].Y, 0, 0);
                 canvasForGraph.Children.Add(elipse);
 
@@ -86,7 +121,7 @@ namespace WpfGraphic
                 line.Y1 = pointsToDraw[i].Y;
                 line.X2 = pointsToDraw[i + 1].X;
                 line.Y2 = pointsToDraw[i + 1].Y;
-                line.Stroke = new SolidColorBrush(Colors.Black);
+                line.Stroke = new SolidColorBrush(_graphicColor);
                 line.StrokeThickness = 1;
                 canvasForGraph.Children.Add(line);
             }

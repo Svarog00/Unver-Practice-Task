@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:WpfGraphic"
              mc:Ignorable="d" 
              d:DesignHeight="559" d:DesignWidth="800">
-    <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown" MouseLeftButtonUp="Grid_MouseLeftButtonUp" MouseMove="Grid_MouseMove">
+    <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown" MouseLeftButtonUp="Grid_MouseLeftButtonUp" MouseMove="Grid_MouseMove" MouseRightButtonDown="Grid_MouseRightButtonDown" MouseRightButtonUp="Grid_MouseRightButtonUp">
         <ScrollViewer Name="scroll" CanContentScroll="True" HorizontalScrollBarVisibility="Visible"  VerticalScrollBarVisibility="Visible">
             <Canvas x:Name="canvasForGraph" HorizontalAlignment="Center" Height="541" VerticalAlignment="Top" Width="800" Background="#FFFF" Margin="0,18,0,0">
                 <Canvas.LayoutTransform>

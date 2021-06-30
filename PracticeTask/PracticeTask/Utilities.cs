@@ -18,7 +18,6 @@ namespace PracticeTask
             {
                 xi = Convert.ToDouble(valuesTable.Rows[i].Cells[0].Value);
                 yi = Convert.ToDouble(valuesTable.Rows[i].Cells[1].Value);
-                //points.Add(new System.Windows.Point(xi, yi));
                 points.Add(new DependentPoint(xi, yi));
             }
 
@@ -34,7 +33,6 @@ namespace PracticeTask
                 xi = Convert.ToDouble(valuesTable.Rows[i].Cells[0].Value);
                 yi = Convert.ToDouble(valuesTable.Rows[i].Cells[1].Value);
                 if (xi >= leftBorder && xi <= rightBorder)
-                    //points.Add(new System.Windows.Point(xi, yi));
                     points.Add(new DependentPoint(xi, yi));
             }
 

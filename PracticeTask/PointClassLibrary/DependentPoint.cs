@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace PointClassLibrary
 {
+    [Serializable]
     //Y depends on X that's why it is equatable by X
     public class DependentPoint : IEquatable<DependentPoint>, IComparable<DependentPoint>
     {
@@ -43,6 +44,11 @@ namespace PointClassLibrary
                 return false;
             else
                 return other.X == _x;
+        }
+
+        public override string ToString()
+        {
+            return $"{_x}; {_y}";
         }
     }
 }

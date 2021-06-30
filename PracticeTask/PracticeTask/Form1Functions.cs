@@ -3,16 +3,26 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PointClassLibrary;
 
 
 namespace PracticeTask
 {
     partial class Form1 : Form
     {
+        private bool _formulaInput;
+        private bool _tableInput;
+        private bool _graphicDrawn = false;
+
+        private double _leftBorder = double.NaN;
+        private double _rightBorder = double.NaN;
+
         //Включение\отключение видимости полей для ввода графика
         private void SwitchVisibility()
         {
@@ -38,7 +48,7 @@ namespace PracticeTask
                 {
                     TableInput();
                 }
-                _graphicCanvas.SetData(_points);
+                _graphicCanvas.SetData(_points, _color.R, _color.G, _color.B);
                 _graphicCanvas.Draw();
                 _graphicDrawn = true;
             }
@@ -58,7 +68,7 @@ namespace PracticeTask
                     {
                         TableInput();
                     }
-                    _graphicCanvas.SetData(_points);
+                    _graphicCanvas.SetData(_points, _color.R, _color.G, _color.B);
                     _graphicCanvas.Draw();
                 }
             }
@@ -118,6 +128,57 @@ namespace PracticeTask
             {
                 MessageBox.Show(exc.Message);
             }
+        }
+        
+        private void _graphicCanvas_OnPointPositionCorrected(object sender, WpfGraphic.UserControl1.OnPointPositionCorrectedEventArgs e)
+        {
+            _points[e.index].X = e.newX;
+            _points[e.index].Y = e.newY;
+            ReloadTable();
+        }
+
+        private void ChangeColor()
+        {
+            colorDialog1.ShowDialog();
+            _color = colorDialog1.Color;
+            Rebuild();
+        }
+
+        private void ReloadTable()
+        {
+            try
+            {
+                for (int i = 0; i < _points.Count; i++)
+                {
+                    if (i == valuesTable.RowCount-1)
+                    {
+                        valuesTable.Rows.Add();
+                    }
+                    valuesTable.Rows[i].Cells[0].Value = _points[i].X.ToString();
+                    valuesTable.Rows[i].Cells[1].Value = _points[i].Y.ToString();
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+        }
+
+        private void SaveFile()
+        {
+            TableInput();
+            saveFileDialog1.ShowDialog();
+            string path = saveFileDialog1.FileName;
+            _serializator.SaveData(_points, path);
+            ReloadTable();
+        }
+
+        private void LoadFromFile()
+        {
+            openFileDialog1.ShowDialog();
+            string path = openFileDialog1.FileName;
+            _points = _serializator.LoadData(path);
+            ReloadTable();
         }
     }
 }

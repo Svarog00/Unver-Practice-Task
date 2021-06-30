@@ -21,58 +21,12 @@ namespace WpfGraphic
     /// </summary>
     public partial class UserControl1 : UserControl
     {
-        private double _horizontalOffset = 1;
-        private double _verticalOffset = 1;
-
-        private bool _isMouseButtonPressed;
-
-        private Point _scrollMousePoint = new Point();
-
         public UserControl1()
         {
             InitializeComponent();
             _yAxis = canvasForGraph.Height / 2;
             _xAxis = canvasForGraph.Width / 2;
-            _scale = 5;
-        }
-
-        public void SetData(List<DependentPoint> points)
-        {
-            _points = points;
-        }
-
-        #region MovingByMouse
-        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            _isMouseButtonPressed = true;
-            _horizontalOffset = scroll.HorizontalOffset;
-            _verticalOffset = scroll.VerticalOffset;
-            _scrollMousePoint = e.GetPosition(scroll);
-        }
-
-        private void Grid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            _isMouseButtonPressed = false;
-        }
-
-        private void Grid_MouseMove(object sender, MouseEventArgs e)
-        {
-            if(_isMouseButtonPressed)
-            {
-                scroll.ScrollToHorizontalOffset(_horizontalOffset + (_scrollMousePoint.X - e.GetPosition(scroll).X));
-                scroll.ScrollToVerticalOffset(_verticalOffset + (_scrollMousePoint.Y - e.GetPosition(scroll).Y));
-            }
-        }
-        #endregion
-
-        private void slider_MouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            //slider.Value += e.Delta / 100;
-            if(_scale + e.Delta / 100 >= 0)
-            {
-                _scale += e.Delta / 100;
-            }
-            Draw();
+            _scale = 10;
         }
     }
 }

@@ -42,24 +42,33 @@ namespace PracticeTask
             this.label2 = new System.Windows.Forms.Label();
             this.paceTextBox = new System.Windows.Forms.TextBox();
             this.paceLabel = new System.Windows.Forms.Label();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.colorChangeButton = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
             this._graphicCanvas = new WpfGraphic.UserControl1();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.загрузитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.valuesTable)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // valuesTable
             // 
             this.valuesTable.AllowUserToDeleteRows = false;
             this.valuesTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.valuesTable.Location = new System.Drawing.Point(12, 85);
+            this.valuesTable.Location = new System.Drawing.Point(12, 100);
             this.valuesTable.Name = "valuesTable";
-            this.valuesTable.Size = new System.Drawing.Size(242, 547);
+            this.valuesTable.Size = new System.Drawing.Size(242, 532);
             this.valuesTable.TabIndex = 0;
             this.valuesTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.valuesTable_CellEndEdit);
             // 
             // buildButton
             // 
-            this.buildButton.Location = new System.Drawing.Point(260, 162);
+            this.buildButton.Location = new System.Drawing.Point(260, 176);
             this.buildButton.Name = "buildButton";
             this.buildButton.Size = new System.Drawing.Size(96, 44);
             this.buildButton.TabIndex = 1;
@@ -69,7 +78,7 @@ namespace PracticeTask
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(362, 162);
+            this.deleteButton.Location = new System.Drawing.Point(362, 176);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(96, 44);
             this.deleteButton.TabIndex = 2;
@@ -79,7 +88,7 @@ namespace PracticeTask
             // 
             // formulaTextBox
             // 
-            this.formulaTextBox.Location = new System.Drawing.Point(12, 13);
+            this.formulaTextBox.Location = new System.Drawing.Point(12, 27);
             this.formulaTextBox.Name = "formulaTextBox";
             this.formulaTextBox.Size = new System.Drawing.Size(349, 20);
             this.formulaTextBox.TabIndex = 3;
@@ -88,7 +97,7 @@ namespace PracticeTask
             // 
             this.tableRadioButton.AutoSize = true;
             this.tableRadioButton.Checked = true;
-            this.tableRadioButton.Location = new System.Drawing.Point(261, 39);
+            this.tableRadioButton.Location = new System.Drawing.Point(261, 53);
             this.tableRadioButton.Name = "tableRadioButton";
             this.tableRadioButton.Size = new System.Drawing.Size(68, 17);
             this.tableRadioButton.TabIndex = 4;
@@ -100,7 +109,7 @@ namespace PracticeTask
             // formulaRadioButton
             // 
             this.formulaRadioButton.AutoSize = true;
-            this.formulaRadioButton.Location = new System.Drawing.Point(261, 62);
+            this.formulaRadioButton.Location = new System.Drawing.Point(261, 76);
             this.formulaRadioButton.Name = "formulaRadioButton";
             this.formulaRadioButton.Size = new System.Drawing.Size(73, 17);
             this.formulaRadioButton.TabIndex = 5;
@@ -110,7 +119,7 @@ namespace PracticeTask
             // 
             // leftBorderTextBox
             // 
-            this.leftBorderTextBox.Location = new System.Drawing.Point(260, 85);
+            this.leftBorderTextBox.Location = new System.Drawing.Point(260, 99);
             this.leftBorderTextBox.Name = "leftBorderTextBox";
             this.leftBorderTextBox.Size = new System.Drawing.Size(100, 20);
             this.leftBorderTextBox.TabIndex = 6;
@@ -118,7 +127,7 @@ namespace PracticeTask
             // 
             // rightBorderTextBox
             // 
-            this.rightBorderTextBox.Location = new System.Drawing.Point(260, 112);
+            this.rightBorderTextBox.Location = new System.Drawing.Point(260, 126);
             this.rightBorderTextBox.Name = "rightBorderTextBox";
             this.rightBorderTextBox.Size = new System.Drawing.Size(100, 20);
             this.rightBorderTextBox.TabIndex = 7;
@@ -127,7 +136,7 @@ namespace PracticeTask
             // borderCheckBox
             // 
             this.borderCheckBox.AutoSize = true;
-            this.borderCheckBox.Location = new System.Drawing.Point(261, 139);
+            this.borderCheckBox.Location = new System.Drawing.Point(261, 153);
             this.borderCheckBox.Name = "borderCheckBox";
             this.borderCheckBox.Size = new System.Drawing.Size(164, 17);
             this.borderCheckBox.TabIndex = 8;
@@ -138,7 +147,7 @@ namespace PracticeTask
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(367, 88);
+            this.label1.Location = new System.Drawing.Point(367, 102);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 13);
             this.label1.TabIndex = 9;
@@ -147,7 +156,7 @@ namespace PracticeTask
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(366, 115);
+            this.label2.Location = new System.Drawing.Point(366, 129);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(89, 13);
             this.label2.TabIndex = 10;
@@ -155,7 +164,7 @@ namespace PracticeTask
             // 
             // paceTextBox
             // 
-            this.paceTextBox.Location = new System.Drawing.Point(13, 40);
+            this.paceTextBox.Location = new System.Drawing.Point(13, 54);
             this.paceTextBox.Name = "paceTextBox";
             this.paceTextBox.Size = new System.Drawing.Size(100, 20);
             this.paceTextBox.TabIndex = 11;
@@ -164,29 +173,77 @@ namespace PracticeTask
             // paceLabel
             // 
             this.paceLabel.AutoSize = true;
-            this.paceLabel.Location = new System.Drawing.Point(13, 63);
+            this.paceLabel.Location = new System.Drawing.Point(13, 77);
             this.paceLabel.Name = "paceLabel";
             this.paceLabel.Size = new System.Drawing.Size(73, 13);
             this.paceLabel.TabIndex = 12;
             this.paceLabel.Text = "Шаг графика";
+            // 
+            // colorChangeButton
+            // 
+            this.colorChangeButton.Location = new System.Drawing.Point(261, 226);
+            this.colorChangeButton.Name = "colorChangeButton";
+            this.colorChangeButton.Size = new System.Drawing.Size(96, 45);
+            this.colorChangeButton.TabIndex = 14;
+            this.colorChangeButton.Text = "Изменить цвет графика";
+            this.colorChangeButton.UseVisualStyleBackColor = true;
+            this.colorChangeButton.Click += new System.EventHandler(this.colorChangeButton_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // elementHost1
             // 
             this.elementHost1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.elementHost1.Location = new System.Drawing.Point(464, 12);
+            this.elementHost1.Location = new System.Drawing.Point(464, 27);
             this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(779, 620);
+            this.elementHost1.Size = new System.Drawing.Size(779, 605);
             this.elementHost1.TabIndex = 13;
             this.elementHost1.Text = "elementHost1";
             this.elementHost1.Child = this._graphicCanvas;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.файлToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1255, 24);
+            this.menuStrip1.TabIndex = 16;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // файлToolStripMenuItem
+            // 
+            this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.сохранитьToolStripMenuItem,
+            this.загрузитьToolStripMenuItem});
+            this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.файлToolStripMenuItem.Text = "Файл";
+            // 
+            // сохранитьToolStripMenuItem
+            // 
+            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.сохранитьToolStripMenuItem.Text = "Сохранить";
+            this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // загрузитьToolStripMenuItem
+            // 
+            this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
+            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.загрузитьToolStripMenuItem.Text = "Загрузить";
+            this.загрузитьToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1255, 646);
+            this.Controls.Add(this.colorChangeButton);
             this.Controls.Add(this.elementHost1);
             this.Controls.Add(this.paceLabel);
             this.Controls.Add(this.paceTextBox);
@@ -201,9 +258,13 @@ namespace PracticeTask
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.buildButton);
             this.Controls.Add(this.valuesTable);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.valuesTable)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -225,7 +286,15 @@ namespace PracticeTask
         private System.Windows.Forms.TextBox paceTextBox;
         private System.Windows.Forms.Label paceLabel;
         private System.Windows.Forms.Integration.ElementHost elementHost1;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.Button colorChangeButton;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
         private WpfGraphic.UserControl1 _graphicCanvas;
+        private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem загрузитьToolStripMenuItem;
     }
 }
 
