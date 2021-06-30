@@ -61,7 +61,7 @@ namespace PracticeTask
             // 
             this.valuesTable.AllowUserToDeleteRows = false;
             this.valuesTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.valuesTable.Location = new System.Drawing.Point(12, 100);
+            this.valuesTable.Location = new System.Drawing.Point(13, 51);
             this.valuesTable.Name = "valuesTable";
             this.valuesTable.Size = new System.Drawing.Size(242, 532);
             this.valuesTable.TabIndex = 0;
@@ -69,7 +69,7 @@ namespace PracticeTask
             // 
             // buildButton
             // 
-            this.buildButton.Location = new System.Drawing.Point(260, 176);
+            this.buildButton.Location = new System.Drawing.Point(261, 127);
             this.buildButton.Name = "buildButton";
             this.buildButton.Size = new System.Drawing.Size(96, 44);
             this.buildButton.TabIndex = 1;
@@ -79,7 +79,7 @@ namespace PracticeTask
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(362, 176);
+            this.deleteButton.Location = new System.Drawing.Point(363, 127);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(96, 44);
             this.deleteButton.TabIndex = 2;
@@ -93,6 +93,7 @@ namespace PracticeTask
             this.formulaTextBox.Name = "formulaTextBox";
             this.formulaTextBox.Size = new System.Drawing.Size(349, 20);
             this.formulaTextBox.TabIndex = 3;
+            this.formulaTextBox.Visible = false;
             // 
             // tableRadioButton
             // 
@@ -105,6 +106,7 @@ namespace PracticeTask
             this.tableRadioButton.TabStop = true;
             this.tableRadioButton.Text = "Таблица";
             this.tableRadioButton.UseVisualStyleBackColor = true;
+            this.tableRadioButton.Visible = false;
             this.tableRadioButton.CheckedChanged += new System.EventHandler(this.tableRadioButton_CheckedChanged);
             // 
             // formulaRadioButton
@@ -116,11 +118,12 @@ namespace PracticeTask
             this.formulaRadioButton.TabIndex = 5;
             this.formulaRadioButton.Text = "Формула";
             this.formulaRadioButton.UseVisualStyleBackColor = true;
+            this.formulaRadioButton.Visible = false;
             this.formulaRadioButton.CheckedChanged += new System.EventHandler(this.formulaRadioButton_CheckedChanged);
             // 
             // leftBorderTextBox
             // 
-            this.leftBorderTextBox.Location = new System.Drawing.Point(260, 99);
+            this.leftBorderTextBox.Location = new System.Drawing.Point(261, 50);
             this.leftBorderTextBox.Name = "leftBorderTextBox";
             this.leftBorderTextBox.Size = new System.Drawing.Size(100, 20);
             this.leftBorderTextBox.TabIndex = 6;
@@ -128,7 +131,7 @@ namespace PracticeTask
             // 
             // rightBorderTextBox
             // 
-            this.rightBorderTextBox.Location = new System.Drawing.Point(260, 126);
+            this.rightBorderTextBox.Location = new System.Drawing.Point(261, 77);
             this.rightBorderTextBox.Name = "rightBorderTextBox";
             this.rightBorderTextBox.Size = new System.Drawing.Size(100, 20);
             this.rightBorderTextBox.TabIndex = 7;
@@ -137,7 +140,7 @@ namespace PracticeTask
             // borderCheckBox
             // 
             this.borderCheckBox.AutoSize = true;
-            this.borderCheckBox.Location = new System.Drawing.Point(261, 153);
+            this.borderCheckBox.Location = new System.Drawing.Point(262, 104);
             this.borderCheckBox.Name = "borderCheckBox";
             this.borderCheckBox.Size = new System.Drawing.Size(164, 17);
             this.borderCheckBox.TabIndex = 8;
@@ -148,7 +151,7 @@ namespace PracticeTask
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(367, 102);
+            this.label1.Location = new System.Drawing.Point(368, 53);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 13);
             this.label1.TabIndex = 9;
@@ -157,7 +160,7 @@ namespace PracticeTask
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(366, 129);
+            this.label2.Location = new System.Drawing.Point(367, 80);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(89, 13);
             this.label2.TabIndex = 10;
@@ -170,6 +173,7 @@ namespace PracticeTask
             this.paceTextBox.Size = new System.Drawing.Size(100, 20);
             this.paceTextBox.TabIndex = 11;
             this.paceTextBox.Text = "1";
+            this.paceTextBox.Visible = false;
             // 
             // paceLabel
             // 
@@ -179,10 +183,11 @@ namespace PracticeTask
             this.paceLabel.Size = new System.Drawing.Size(73, 13);
             this.paceLabel.TabIndex = 12;
             this.paceLabel.Text = "Шаг графика";
+            this.paceLabel.Visible = false;
             // 
             // colorChangeButton
             // 
-            this.colorChangeButton.Location = new System.Drawing.Point(261, 226);
+            this.colorChangeButton.Location = new System.Drawing.Point(262, 177);
             this.colorChangeButton.Name = "colorChangeButton";
             this.colorChangeButton.Size = new System.Drawing.Size(96, 45);
             this.colorChangeButton.TabIndex = 14;
@@ -229,14 +234,14 @@ namespace PracticeTask
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // загрузитьToolStripMenuItem
             // 
             this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
-            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.загрузитьToolStripMenuItem.Text = "Загрузить";
             this.загрузитьToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 

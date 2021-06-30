@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows;
 
 namespace PracticeTask
@@ -21,9 +22,9 @@ namespace PracticeTask
                 formatter.Serialize(fs, points); //serialize savedData in fs file
                 fs.Close(); //close file stream
             }
-            catch (System.Exception Error)
+            catch (Exception Error)
             {
-                MessageBox.Show(Error.Message);
+                System.Windows.MessageBox.Show(Error.Message);
             }
             finally
             {
@@ -43,9 +44,9 @@ namespace PracticeTask
                     points = (List<DependentPoint>)formatter.Deserialize(fs);
                     return points;
                 }
-                catch (System.Exception Error)
+                catch (Exception Error)
                 {
-                    MessageBox.Show(Error.Message);
+                    System.Windows.MessageBox.Show(Error.Message);
                     return null;
                 }
                 finally
@@ -55,6 +56,26 @@ namespace PracticeTask
             }
             else
                 return null;
+        }
+
+        public void LoadReference(out string text)
+        {
+            FileStream fs = File.OpenRead("Reference.txt");
+            try
+            {
+                byte[] array = new byte[fs.Length];
+                fs.Read(array, 0, array.Length);
+                text = Encoding.UTF8.GetString(array);
+            }
+            catch(Exception exc)
+            {
+                System.Windows.MessageBox.Show(exc.Message);
+                text = null;
+            }
+            finally
+            {
+                fs.Close();
+            }
         }
     }
 }

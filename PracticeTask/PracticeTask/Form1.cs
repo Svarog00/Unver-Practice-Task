@@ -50,7 +50,6 @@ namespace PracticeTask
             SwitchVisibility();
         }
 
-
         private void buildButton_Click(object sender, EventArgs e)
         {
             Build();
@@ -109,7 +108,7 @@ namespace PracticeTask
 
         private void referenceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            ShowReference();
         }
     }
 }

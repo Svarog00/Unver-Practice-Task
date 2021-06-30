@@ -190,7 +190,9 @@ namespace PracticeTask
 
         private void ShowReference()
         {
-            //MessageBox.Show();
+            string reference;
+            _serializator.LoadReference(out reference);
+            MessageBox.Show(reference);
         }
     }
 }
