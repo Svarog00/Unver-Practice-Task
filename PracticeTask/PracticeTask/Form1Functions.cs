@@ -166,11 +166,18 @@ namespace PracticeTask
 
         private void SaveFile()
         {
-            TableInput();
-            saveFileDialog1.ShowDialog();
-            string path = saveFileDialog1.FileName;
-            _serializator.SaveData(_points, path);
-            ReloadTable();
+            try
+            {
+                TableInput();
+                saveFileDialog1.ShowDialog();
+                string path = saveFileDialog1.FileName;
+                _serializator.SaveData(_points, path);
+                ReloadTable();
+            }
+            catch(Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
 
         private void LoadFromFile()
@@ -179,6 +186,11 @@ namespace PracticeTask
             string path = openFileDialog1.FileName;
             _points = _serializator.LoadData(path);
             ReloadTable();
+        }
+
+        private void ShowReference()
+        {
+            //MessageBox.Show();
         }
     }
 }

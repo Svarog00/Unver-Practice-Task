@@ -25,6 +25,8 @@ namespace WpfGraphic
         private bool _isPointSelected = false;
         private int _selectedPointIndex = -1;
 
+        private int _scrollerK = 120;
+
         private Point _scrollMousePoint = new Point();
 
         public event EventHandler<OnPointPositionCorrectedEventArgs> OnPointPositionCorrected;
@@ -38,10 +40,9 @@ namespace WpfGraphic
 
         private void slider_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            //slider.Value += e.Delta / 100;
-            if (_scale + e.Delta / 100 >= 0)
+            if (_scale + e.Delta / _scrollerK >= 5)
             {
-                _scale += e.Delta / 100;
+                _scale += e.Delta / _scrollerK;
             }
             Draw();
         }
@@ -84,12 +85,23 @@ namespace WpfGraphic
             y = _yAxis - point.Y * _scale;
         }
 
+        private void GetLogicPosition(Point point, out double x, out double y)
+        {
+            x = (point.X - _xAxis) / _scale;
+            y = (point.Y - _yAxis) / _scale;
+        }
+
         private void SetPointPosition(DependentPoint pointToMove, Point newPosition)
         {
-            double deltaX = pointToMove.X - ((newPosition.X - _xAxis) / _scale);
-            double deltaY = pointToMove.Y - ((newPosition.Y + _yAxis) / _scale);
+            double tmpX;
+            double tmpY;
+
+            GetLogicPosition(newPosition, out tmpX, out tmpY);
+
+            double deltaX = pointToMove.X - tmpX;
+            double deltaY = pointToMove.Y + tmpY;
             pointToMove.X -= deltaX;
-            pointToMove.Y += deltaY;
+            pointToMove.Y -= deltaY;
 
             OnPointPositionCorrected?.Invoke(this, new OnPointPositionCorrectedEventArgs
             {
@@ -108,7 +120,6 @@ namespace WpfGraphic
                 if (Math.Abs(e.GetPosition(canvasForGraph).X - tmpX) <= 5
                     && Math.Abs(e.GetPosition(canvasForGraph).Y - tmpY) <= 5)
                 {
-                    //MessageBox.Show($"{e.GetPosition(canvasForGraph).X};{e.GetPosition(canvasForGraph).Y}\n {tmpX};{tmpY}\n {_points[0].X};{_points[0].Y}");
                     _selectedPointIndex = i;
                     _isPointSelected = true;
                 }

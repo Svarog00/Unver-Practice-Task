@@ -22,6 +22,11 @@ namespace PracticeTask
         public Form1()
         {
             InitializeComponent();
+            Initialize();
+        }
+
+        void Initialize()
+        {
             Text = "Форма ввода";
             valuesTable.Columns.Add("-", "x");
             valuesTable.Columns.Add("-", "y");
@@ -100,6 +105,11 @@ namespace PracticeTask
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadFromFile();
+        }
+
+        private void referenceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -16,8 +16,19 @@ namespace PracticeTask
         {
             FileStream fs = new FileStream(path, FileMode.Create); //open stream to create a save file
             BinaryFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(fs, points); //serialize savedData in fs file
-            fs.Close(); //close file stream
+            try
+            {
+                formatter.Serialize(fs, points); //serialize savedData in fs file
+                fs.Close(); //close file stream
+            }
+            catch (System.Exception Error)
+            {
+                MessageBox.Show(Error.Message);
+            }
+            finally
+            {
+                fs.Close();
+            }
         }
 
         public List<DependentPoint> LoadData(string path)
