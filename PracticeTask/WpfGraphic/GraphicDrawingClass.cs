@@ -31,16 +31,12 @@ namespace WpfGraphic
 		{
 			_points = points;
 			_graphicColor = Colors.Black;
-			/*_yAxis = canvasForGraph.Width / 2;
-			_xAxis = canvasForGraph.Height / 2;*/
 		}
 
 		public void SetData(List<DependentPoint> points, byte r, byte g, byte b)
 		{
 			_points = points;
 			_graphicColor = Color.FromRgb(r, g, b);
-			/*_yAxis = canvasForGraph.Width / 2;
-			_xAxis = canvasForGraph.Height / 2;*/
 		}
 
 		public void Draw()
@@ -55,33 +51,51 @@ namespace WpfGraphic
 		{
 			double delta = _scale;
 			//Y axis
-			double width = 0;
+			double width = 1;
 			while (width < canvasForGraph.Width)
 			{
 				Line yAxis = new Line();
 				yAxis.Y1 = 0;
 				yAxis.Y2 = canvasForGraph.Height;
-				yAxis.X1 = width;
-				yAxis.X2 = width;
+				yAxis.X1 = _xAxis + width;
+				yAxis.X2 = _xAxis + width;
 				yAxis.Stroke = new SolidColorBrush(Colors.Gray);
 				yAxis.StrokeThickness = 0.25;
-				width += delta;
 				canvasForGraph.Children.Add(yAxis);
+
+				yAxis = new Line();
+				yAxis.Y1 = 0;
+				yAxis.Y2 = canvasForGraph.Height;
+				yAxis.X1 = _xAxis - width;
+				yAxis.X2 = _xAxis - width;
+				yAxis.Stroke = new SolidColorBrush(Colors.Gray);
+				yAxis.StrokeThickness = 0.25;
+				canvasForGraph.Children.Add(yAxis);
+				width += delta;
 			}
 			//X axis
-			double height = 0;
+			double height = 1;
 			while (height < canvasForGraph.Height)
 			{
 				Line xAxis = new Line();
-				xAxis.Y1 = height;
-				xAxis.Y2 = height;
-				
+				xAxis.Y1 = _yAxis + height;
+				xAxis.Y2 = _yAxis + height;
 				xAxis.X1 = 0;
 				xAxis.X2 = canvasForGraph.Width;
 				xAxis.Stroke = new SolidColorBrush(Colors.Gray);
 				xAxis.StrokeThickness = 0.25;
-				height += delta;
 				canvasForGraph.Children.Add(xAxis);
+
+				xAxis = new Line();
+				xAxis.Y1 = _yAxis - height;
+				xAxis.Y2 = _yAxis - height;
+				xAxis.X1 = 0;
+				xAxis.X2 = canvasForGraph.Width;
+				xAxis.Stroke = new SolidColorBrush(Colors.Gray);
+				xAxis.StrokeThickness = 0.25;
+				canvasForGraph.Children.Add(xAxis);
+
+				height += delta;
 			}
 		}
 

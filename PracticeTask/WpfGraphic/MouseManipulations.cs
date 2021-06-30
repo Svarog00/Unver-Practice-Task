@@ -40,7 +40,7 @@ namespace WpfGraphic
 
         private void slider_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (_scale + e.Delta / _scrollerK >= 5)
+            if (_scale + e.Delta / _scrollerK >= 2)
             {
                 _scale += e.Delta / _scrollerK;
             }
