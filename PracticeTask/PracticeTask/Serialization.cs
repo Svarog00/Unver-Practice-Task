@@ -58,19 +58,20 @@ namespace PracticeTask
                 return null;
         }
 
-        public void LoadReference(out string text)
+        public string LoadReference()
         {
+            string text;
             FileStream fs = File.OpenRead("Reference.txt");
             try
             {
                 byte[] array = new byte[fs.Length];
                 fs.Read(array, 0, array.Length);
-                text = Encoding.UTF8.GetString(array);
+                return text = Encoding.UTF8.GetString(array);
             }
             catch(Exception exc)
             {
                 System.Windows.MessageBox.Show(exc.Message);
-                text = null;
+                return text = null;
             }
             finally
             {

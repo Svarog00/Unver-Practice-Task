@@ -16,9 +16,11 @@ using PointClassLibrary;
 
 namespace WpfGraphic
 {
-	public partial class UserControl1 : UserControl
+	public partial class DrawingClass
 	{
 		private List<DependentPoint> _points = new List<DependentPoint>();
+
+		private Canvas _canvasForGraph;
 
 		private double _yAxis;
 		private double _xAxis;
@@ -27,21 +29,40 @@ namespace WpfGraphic
 
 		private Color _graphicColor = Colors.Black;
 
-		public void SetData(List<DependentPoint> points)
+		public double Xaxis
+        {
+			get => _xAxis;
+			set => _xAxis = value;
+        }
+
+		public double Yaxis
 		{
-			_points = points;
-			_graphicColor = Colors.Black;
+			get => _yAxis;
+			set => _yAxis = value;
 		}
 
-		public void SetData(List<DependentPoint> points, byte r, byte g, byte b)
+		public List<DependentPoint> Points
+        {
+			get => _points;
+			private set => _points = value;
+        }
+
+		public void SetData(List<DependentPoint> points, byte r, byte g, byte b, bool toCentre = false, double xAxisStart = 0, double yAxisStart = 0)
 		{
 			_points = points;
 			_graphicColor = Color.FromRgb(r, g, b);
+			if(toCentre)
+            {
+				_xAxis = xAxisStart;
+				_yAxis = yAxisStart;
+			}
 		}
 
-		public void Draw()
+		public void Draw(Canvas canvasToDraw, float scale)
 		{
-			canvasForGraph.Children.Clear();
+			_canvasForGraph = canvasToDraw;
+			_scale = scale;
+			_canvasForGraph.Children.Clear();
 			DrawAxles();
 			DrawNet();
 			DrawPoints();
@@ -51,49 +72,49 @@ namespace WpfGraphic
 		{
 			double delta = _scale;
 			//Y axis
-			double width = 1;
-			while (width < canvasForGraph.Width)
+			double width = 0;
+			while (width < _canvasForGraph.Width)
 			{
 				Line yAxis = new Line();
 				yAxis.Y1 = 0;
-				yAxis.Y2 = canvasForGraph.Height;
+				yAxis.Y2 = _canvasForGraph.Height;
 				yAxis.X1 = _xAxis + width;
 				yAxis.X2 = _xAxis + width;
 				yAxis.Stroke = new SolidColorBrush(Colors.Gray);
-				yAxis.StrokeThickness = 0.25;
-				canvasForGraph.Children.Add(yAxis);
+				yAxis.StrokeThickness = 0.25 * (_scale/25);
+				_canvasForGraph.Children.Add(yAxis);
 
 				yAxis = new Line();
 				yAxis.Y1 = 0;
-				yAxis.Y2 = canvasForGraph.Height;
+				yAxis.Y2 = _canvasForGraph.Height;
 				yAxis.X1 = _xAxis - width;
 				yAxis.X2 = _xAxis - width;
 				yAxis.Stroke = new SolidColorBrush(Colors.Gray);
-				yAxis.StrokeThickness = 0.25;
-				canvasForGraph.Children.Add(yAxis);
+				yAxis.StrokeThickness = 0.25 * (_scale / 25);
+				_canvasForGraph.Children.Add(yAxis);
 				width += delta;
 			}
 			//X axis
-			double height = 1;
-			while (height < canvasForGraph.Height)
+			double height = 0;
+			while (height < _canvasForGraph.Height)
 			{
 				Line xAxis = new Line();
 				xAxis.Y1 = _yAxis + height;
 				xAxis.Y2 = _yAxis + height;
 				xAxis.X1 = 0;
-				xAxis.X2 = canvasForGraph.Width;
+				xAxis.X2 = _canvasForGraph.Width;
 				xAxis.Stroke = new SolidColorBrush(Colors.Gray);
-				xAxis.StrokeThickness = 0.25;
-				canvasForGraph.Children.Add(xAxis);
+				xAxis.StrokeThickness = 0.25 * (_scale / 25);
+				_canvasForGraph.Children.Add(xAxis);
 
 				xAxis = new Line();
 				xAxis.Y1 = _yAxis - height;
 				xAxis.Y2 = _yAxis - height;
 				xAxis.X1 = 0;
-				xAxis.X2 = canvasForGraph.Width;
+				xAxis.X2 = _canvasForGraph.Width;
 				xAxis.Stroke = new SolidColorBrush(Colors.Gray);
-				xAxis.StrokeThickness = 0.25;
-				canvasForGraph.Children.Add(xAxis);
+				xAxis.StrokeThickness = 0.25 * (_scale / 25);
+				_canvasForGraph.Children.Add(xAxis);
 
 				height += delta;
 			}
@@ -104,21 +125,21 @@ namespace WpfGraphic
 			//Y axis
 			Line yAxis = new Line();
 			yAxis.Y1 = 0;
-			yAxis.Y2 = canvasForGraph.Height;
-			yAxis.X1 = canvasForGraph.Width / 2;
-			yAxis.X2 = canvasForGraph.Width / 2;
+			yAxis.Y2 = _canvasForGraph.Height;
+			yAxis.X1 = _canvasForGraph.Width / 2;
+			yAxis.X2 = _canvasForGraph.Width / 2;
 			yAxis.StrokeThickness = 1;
 			yAxis.Stroke = new SolidColorBrush(Colors.Black);
-			canvasForGraph.Children.Add(yAxis);
+			_canvasForGraph.Children.Add(yAxis);
 			//X axis
 			Line xAxis = new Line();
-			xAxis.Y1 = canvasForGraph.Height / 2;
-			xAxis.Y2 = canvasForGraph.Height / 2;
+			xAxis.Y1 = _canvasForGraph.Height / 2;
+			xAxis.Y2 = _canvasForGraph.Height / 2;
 			xAxis.X1 = 0;
-			xAxis.X2 = canvasForGraph.Width;
+			xAxis.X2 = _canvasForGraph.Width;
 			xAxis.StrokeThickness = 1;
 			xAxis.Stroke = new SolidColorBrush(Colors.Black);
-			canvasForGraph.Children.Add(xAxis);
+			_canvasForGraph.Children.Add(xAxis);
 		}
 
 		private void DrawPoints()
@@ -136,12 +157,12 @@ namespace WpfGraphic
 				elipse.StrokeThickness = 2;
 				elipse.Stroke = new SolidColorBrush(_graphicColor);
 				elipse.Margin = new Thickness(pointsToDraw[i].X - elipse.Width/2, pointsToDraw[i].Y - elipse.Height/2, 0, 0);
-				canvasForGraph.Children.Add(elipse);
+				_canvasForGraph.Children.Add(elipse);
 
 				Label label = new Label();
 				label.Content = _points[i].X + " " + _points[i].Y;
 				label.Margin = new Thickness(_xAxis + _points[i].X * _scale, _yAxis - _points[i].Y * _scale, 0, 0);
-				canvasForGraph.Children.Add(label);
+				_canvasForGraph.Children.Add(label);
 			}
 
 			//Связать каждую точку со своим соседом
@@ -154,7 +175,7 @@ namespace WpfGraphic
 				line.Y2 = pointsToDraw[i + 1].Y;
 				line.Stroke = new SolidColorBrush(_graphicColor);
 				line.StrokeThickness = 1;
-				canvasForGraph.Children.Add(line);
+				_canvasForGraph.Children.Add(line);
 			}
 		}
 	}

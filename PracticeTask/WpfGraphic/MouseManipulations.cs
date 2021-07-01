@@ -18,16 +18,21 @@ namespace WpfGraphic
 {
     public partial class UserControl1 : UserControl
     {
+        private const int NOPOINTSELECTED = -1;
+
         private double _horizontalOffset = 1;
         private double _verticalOffset = 1;
 
         private bool _isMouseButtonPressed = false;
         private bool _isPointSelected = false;
+        private bool _mouseMove = false;
+
         private int _selectedPointIndex = -1;
 
         private int _scrollerK = 120;
 
         private Point _scrollMousePoint = new Point();
+        private Point _mousePoint = new Point();
 
         public event EventHandler<OnPointPositionCorrectedEventArgs> OnPointPositionCorrected;
 
@@ -71,7 +76,14 @@ namespace WpfGraphic
 
             if (_isPointSelected)
             {
-                SetPointPosition(_points[_selectedPointIndex], e.GetPosition(canvasForGraph));
+                SetPointPosition(_drawingClass.Points[_selectedPointIndex], e.GetPosition(canvasForGraph));
+                Draw();
+            }
+
+            if(_mouseMove)
+            {
+                _drawingClass.Xaxis -= (_mousePoint.X - e.GetPosition(canvasForGraph).X) / 50;
+                _drawingClass.Yaxis -= (_mousePoint.Y - e.GetPosition(canvasForGraph).Y)/50;
                 Draw();
             }
         }
@@ -79,16 +91,49 @@ namespace WpfGraphic
 
 
         #region PointMoving
-        private void GetCanvasPosition(DependentPoint point, out double x, out double y)
+        private void Grid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            x = _xAxis + point.X * _scale;
-            y = _yAxis - point.Y * _scale;
+            GetPointOnMousePosition(e.GetPosition(canvasForGraph));
+
+            if(_selectedPointIndex == NOPOINTSELECTED)
+            {
+                _mouseMove = true;
+                _mousePoint = e.GetPosition(canvasForGraph);
+            }
+        }
+
+        private void Grid_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            _selectedPointIndex = -1;
+            _isPointSelected = false;
+            _mouseMove = false;
+        }
+
+        private void GetPointOnMousePosition(Point mousePosition)
+        {
+            double tmpX, tmpY;
+            for (int i = 0; i < _drawingClass.Points.Count; i++)
+            {
+                GetCanvasPosition(_drawingClass.Points[i], out tmpX, out tmpY);
+                if (Math.Abs(mousePosition.X - tmpX) <= 5
+                    && Math.Abs(mousePosition.Y - tmpY) <= 5)
+                {
+                    _selectedPointIndex = i;
+                    _isPointSelected = true;
+                }
+            }
+        }
+
+        private void GetCanvasPosition<T>(T point, out double x, out double y) where T : DependentPoint
+        {
+            x = _drawingClass.Xaxis + point.X * _scale;
+            y = _drawingClass.Yaxis - point.Y * _scale;
         }
 
         private void GetLogicPosition(Point point, out double x, out double y)
         {
-            x = (point.X - _xAxis) / _scale;
-            y = (point.Y - _yAxis) / _scale;
+            x = (point.X - _drawingClass.Xaxis) / _scale;
+            y = (point.Y - _drawingClass.Yaxis) / _scale;
         }
 
         private void SetPointPosition(DependentPoint pointToMove, Point newPosition)
@@ -111,26 +156,6 @@ namespace WpfGraphic
             });
         }
 
-        private void Grid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            double tmpX, tmpY;
-            for (int i = 0; i < _points.Count; i++)
-            {
-                GetCanvasPosition(_points[i], out tmpX, out tmpY);
-                if (Math.Abs(e.GetPosition(canvasForGraph).X - tmpX) <= 5
-                    && Math.Abs(e.GetPosition(canvasForGraph).Y - tmpY) <= 5)
-                {
-                    _selectedPointIndex = i;
-                    _isPointSelected = true;
-                }
-            }
-        }
-
-        private void Grid_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            _selectedPointIndex = -1;
-            _isPointSelected = false;
-        }
 
         #endregion
     }

@@ -48,13 +48,13 @@ namespace PracticeTask
                 {
                     TableInput();
                 }
-                _graphicCanvas.SetData(_points, _color.R, _color.G, _color.B);
+                _graphicCanvas.SetData(_points, _color.R, _color.G, _color.B, true);
                 _graphicCanvas.Draw();
                 _graphicDrawn = true;
             }
             catch (Exception exc)
             {
-                MessageBox.Show(exc.Message);
+                ShowError(exc.Message);
             }
         }
         //Перерисовка графика на основе изменений таблицы
@@ -74,7 +74,23 @@ namespace PracticeTask
             }
             catch (Exception exc)
             {
-                MessageBox.Show(exc.Message);
+                ShowError(exc.Message);
+            }
+        }
+        //Возврат графика в центр после перемещения
+        private void ResetGraphic()
+        {
+            try
+            {
+                if (_graphicDrawn)
+                {
+                    _graphicCanvas.SetData(_points, _color.R, _color.G, _color.B, true);
+                    _graphicCanvas.Draw();
+                }
+            }
+            catch (Exception exc)
+            {
+                ShowError(exc.Message);
             }
         }
         //Сохранение введенных значений границ графика в отдельных переменных
@@ -87,7 +103,7 @@ namespace PracticeTask
             }
             catch (Exception exc)
             {
-                MessageBox.Show(exc.Message);
+                ShowError(exc.Message);
             }
         }
         //Функция для получения значений из таблицы для постройки графика
@@ -126,7 +142,7 @@ namespace PracticeTask
             }
             catch (Exception exc)
             {
-                MessageBox.Show(exc.Message);
+                ShowError(exc.Message);
             }
         }
         
@@ -160,7 +176,7 @@ namespace PracticeTask
             }
             catch (Exception exc)
             {
-                MessageBox.Show(exc.Message);
+                ShowError(exc.Message);
             }
         }
 
@@ -176,7 +192,7 @@ namespace PracticeTask
             }
             catch(Exception exc)
             {
-                MessageBox.Show(exc.Message);
+                ShowError(exc.Message);
             }
         }
 
@@ -190,9 +206,14 @@ namespace PracticeTask
 
         private void ShowReference()
         {
-            string reference;
-            _serializator.LoadReference(out reference);
-            MessageBox.Show(reference);
+            MessageBox.Show(_serializator.LoadReference(), "Справка", 
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void ShowError(string message)
+        {
+            MessageBox.Show(message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

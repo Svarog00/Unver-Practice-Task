@@ -110,5 +110,10 @@ namespace PracticeTask
         {
             ShowReference();
         }
+
+        private void returnButton_Click(object sender, EventArgs e)
+        {
+            ResetGraphic();
+        }
     }
 }

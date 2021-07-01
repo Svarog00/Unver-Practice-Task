@@ -53,6 +53,7 @@ namespace PracticeTask
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.загрузитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.referenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.returnButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.valuesTable)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -252,11 +253,22 @@ namespace PracticeTask
             this.referenceToolStripMenuItem.Text = "Справка";
             this.referenceToolStripMenuItem.Click += new System.EventHandler(this.referenceToolStripMenuItem_Click);
             // 
+            // returnButton
+            // 
+            this.returnButton.Location = new System.Drawing.Point(364, 177);
+            this.returnButton.Name = "returnButton";
+            this.returnButton.Size = new System.Drawing.Size(96, 45);
+            this.returnButton.TabIndex = 17;
+            this.returnButton.Text = "Вернуть график в центр";
+            this.returnButton.UseVisualStyleBackColor = true;
+            this.returnButton.Click += new System.EventHandler(this.returnButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1255, 646);
+            this.Controls.Add(this.returnButton);
             this.Controls.Add(this.colorChangeButton);
             this.Controls.Add(this.elementHost1);
             this.Controls.Add(this.paceLabel);
@@ -310,6 +322,7 @@ namespace PracticeTask
         private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem загрузитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem referenceToolStripMenuItem;
+        private System.Windows.Forms.Button returnButton;
     }
 }
 
