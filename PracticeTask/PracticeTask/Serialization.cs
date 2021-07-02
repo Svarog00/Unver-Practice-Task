@@ -13,13 +13,13 @@ namespace PracticeTask
 {
     public class Serialization
     {
-        public void SaveData(List<DependentPoint> points, string path)
+        public void SaveData(SavedData data, string path)
         {
             FileStream fs = new FileStream(path, FileMode.Create); //open stream to create a save file
             BinaryFormatter formatter = new BinaryFormatter();
             try
             {
-                formatter.Serialize(fs, points); //serialize savedData in fs file
+                formatter.Serialize(fs, data); //serialize savedData in fs file
                 fs.Close(); //close file stream
             }
             catch (Exception Error)
@@ -32,17 +32,17 @@ namespace PracticeTask
             }
         }
 
-        public List<DependentPoint> LoadData(string path)
+        public SavedData LoadData(string path)
         {
             if (File.Exists(path))
             {
                 FileStream fs = new FileStream(path, FileMode.Open);
                 BinaryFormatter formatter = new BinaryFormatter();
-                List<DependentPoint> points = new List<DependentPoint>();
+                SavedData data = new SavedData();
                 try
                 {
-                    points = (List<DependentPoint>)formatter.Deserialize(fs);
-                    return points;
+                    data = (SavedData)formatter.Deserialize(fs);
+                    return data;
                 }
                 catch (Exception Error)
                 {

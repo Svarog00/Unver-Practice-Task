@@ -44,7 +44,6 @@ namespace WpfGraphic
 		public List<DependentPoint> Points
         {
 			get => _points;
-			private set => _points = value;
         }
 
 		public void SetData(List<DependentPoint> points, byte r, byte g, byte b, bool toCentre = false, double xAxisStart = 0, double yAxisStart = 0)

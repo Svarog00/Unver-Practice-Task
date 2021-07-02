@@ -20,8 +20,8 @@ namespace PracticeTask
         private bool _tableInput;
         private bool _graphicDrawn = false;
 
-        private double _leftBorder = double.NaN;
-        private double _rightBorder = double.NaN;
+        private double _leftBorder = 0;
+        private double _rightBorder = 0;
 
         //Включение\отключение видимости полей для ввода графика
         private void SwitchVisibility()
@@ -184,11 +184,16 @@ namespace PracticeTask
         {
             try
             {
-                TableInput();
-                saveFileDialog1.ShowDialog();
-                string path = saveFileDialog1.FileName;
-                _serializator.SaveData(_points, path);
-                ReloadTable();
+                _points.FormListFromTable(valuesTable);
+                saveFileDialog1.FileName = "NewTable";
+                saveFileDialog1.Filter = "verkhovets type (*.verkhovets)|*.verkhovets";
+                if(saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    SavedData data = new SavedData(_points, _color.R, _color.G, _color.B, borderCheckBox.Checked, _leftBorder, _rightBorder);
+                    string path = saveFileDialog1.FileName;
+                    _serializator.SaveData(data, path);
+                    ReloadTable();
+                }
             }
             catch(Exception exc)
             {
@@ -198,10 +203,14 @@ namespace PracticeTask
 
         private void LoadFromFile()
         {
-            openFileDialog1.ShowDialog();
-            string path = openFileDialog1.FileName;
-            _points = _serializator.LoadData(path);
-            ReloadTable();
+            openFileDialog1.Filter = "verkhovets type (*.verkhovets)|*.verkhovets";
+            if(openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string path = openFileDialog1.FileName;
+                SavedData data = _serializator.LoadData(path);
+                UpdateData(data);
+                Build();
+            }
         }
 
         private void ShowReference()
@@ -214,6 +223,23 @@ namespace PracticeTask
         {
             MessageBox.Show(message, "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void UpdateData(SavedData data)
+        {
+            _points = data.Points;
+            _color = Color.FromArgb(data.R, data.G, data.B);
+            borderCheckBox.Checked = data.UseBorders;
+            _leftBorder = data.LeftBorder;
+            _rightBorder = data.RightBorder;
+            UpdateFields();
+        }
+
+        private void UpdateFields()
+        {
+            ReloadTable();
+            leftBorderTextBox.Text = _leftBorder.ToString();
+            rightBorderTextBox.Text = _rightBorder.ToString();
         }
     }
 }
