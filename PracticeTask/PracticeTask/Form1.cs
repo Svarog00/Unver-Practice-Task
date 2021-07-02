@@ -75,19 +75,36 @@ namespace PracticeTask
 
         private void leftBorderTextBox_TextChanged(object sender, EventArgs e)
         {
-            if(rightBorderTextBox.Text.Length > 0)
+            if(rightBorderTextBox.Text.Length > 0 && leftBorderTextBox.Text.Length > 0 && leftBorderTextBox.Text != "-")
                 Rebuild();
         }
 
         private void rightBorderTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (leftBorderTextBox.Text.Length > 0)
+            if (rightBorderTextBox.Text.Length > 0 && leftBorderTextBox.Text.Length > 0 && rightBorderTextBox.Text != "-")
                 Rebuild();
+            
         }
-        
+
+        private void RightBorderTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsPunctuation(e.KeyChar) && e.KeyChar != '-' && e.KeyChar != 8) //Если символ, введенный с клавы - не цифра (IsDigit),
+            {
+                e.Handled = true;// то событие не обрабатывается. ch!=8 (8 - это Backspace)
+            }
+        }
+
+        private void LeftBorderTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsPunctuation(e.KeyChar) && e.KeyChar != '-' && e.KeyChar != 8) //Если символ, введенный с клавы - не цифра (IsDigit),
+            {
+                e.Handled = true;// то событие не обрабатывается. ch!=8 (8 - это Backspace)
+            }
+        }
+
         private void borderCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (rightBorderTextBox.Text.Length > 0 && leftBorderTextBox.Text.Length > 0)
+            if (rightBorderTextBox.Text.Length > 0 && leftBorderTextBox.Text.Length > 0 && rightBorderTextBox.Text != "-" && leftBorderTextBox.Text != "-")
                 Rebuild();
         }
 

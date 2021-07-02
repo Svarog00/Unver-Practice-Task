@@ -129,6 +129,7 @@ namespace PracticeTask
             this.leftBorderTextBox.Size = new System.Drawing.Size(100, 20);
             this.leftBorderTextBox.TabIndex = 6;
             this.leftBorderTextBox.TextChanged += new System.EventHandler(this.leftBorderTextBox_TextChanged);
+            this.leftBorderTextBox.KeyPress += LeftBorderTextBox_KeyPress;
             // 
             // rightBorderTextBox
             // 
@@ -137,6 +138,7 @@ namespace PracticeTask
             this.rightBorderTextBox.Size = new System.Drawing.Size(100, 20);
             this.rightBorderTextBox.TabIndex = 7;
             this.rightBorderTextBox.TextChanged += new System.EventHandler(this.rightBorderTextBox_TextChanged);
+            this.rightBorderTextBox.KeyPress += RightBorderTextBox_KeyPress;
             // 
             // borderCheckBox
             // 
