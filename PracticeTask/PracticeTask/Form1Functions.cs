@@ -23,6 +23,8 @@ namespace PracticeTask
         private double _leftBorder = 0;
         private double _rightBorder = 0;
 
+        private const string TEXTREFERENCE = "Верхний ползунок для приближения-отдаления окна с графиком \n\nС помощью колесика мыши масштабируется график\nПеремещение по графику - ЛКМ\nПеремещение точки -ПКМ при зажатии кнопки на точке\nПермещение графика - ПКМ в любом месте кроме точек\n\nДля полной перестройки графика нажать на кнопку \"Построить\"\nЕсли есть желание вернуть график в центр после его перемещения по холсту, то нажать на кнопку \"Вернуть график в центр\"\n\nИзменения в таблице лишь корректируют график на рисунке, а не строят график с нуля\nИзменения на графике путем перемещения точек меняют данные в таблице, поэтому при перестройке эти данные сохраняются";
+
         //Включение\отключение видимости полей для ввода графика
         private void SwitchVisibility()
         {
@@ -116,8 +118,7 @@ namespace PracticeTask
                 AdjustBorders();
                 _points.FormListFromTable(valuesTable, _leftBorder, _rightBorder);
             }
-
-            _points.Sort();
+            ReloadTable();
         }
         //Проверка на то, чтобы не было несколько иксов. На вход получает индекс строки, в которой происходит изменение
         private void CheckXs(int index)
@@ -162,6 +163,7 @@ namespace PracticeTask
 
         private void ReloadTable()
         {
+            valuesTable.Rows.Clear();
             try
             {
                 for (int i = 0; i < _points.Count; i++)
@@ -185,6 +187,7 @@ namespace PracticeTask
             try
             {
                 _points.FormListFromTable(valuesTable);
+                AdjustBorders();
                 saveFileDialog1.FileName = "NewTable";
                 saveFileDialog1.Filter = "verkhovets type (*.verkhovets)|*.verkhovets";
                 if(saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -215,8 +218,13 @@ namespace PracticeTask
 
         private void ShowReference()
         {
-            MessageBox.Show(_serializator.LoadReference(), "Справка", 
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            string text = _serializator.LoadReference();
+            if(text == null)
+            {
+                text = TEXTREFERENCE;
+            }
+            MessageBox.Show(text, "Справка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void ShowError(string message)
@@ -229,10 +237,10 @@ namespace PracticeTask
         {
             _points = data.Points;
             _color = Color.FromArgb(data.R, data.G, data.B);
-            borderCheckBox.Checked = data.UseBorders;
             _leftBorder = data.LeftBorder;
             _rightBorder = data.RightBorder;
             UpdateFields();
+            borderCheckBox.Checked = data.UseBorders;
         }
 
         private void UpdateFields()

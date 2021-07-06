@@ -61,21 +61,16 @@ namespace PracticeTask
         public string LoadReference()
         {
             string text;
-            FileStream fs = File.OpenRead("Reference.txt");
             try
             {
+                FileStream fs = File.OpenRead("Reference.txt");
                 byte[] array = new byte[fs.Length];
                 fs.Read(array, 0, array.Length);
                 return text = Encoding.UTF8.GetString(array);
             }
             catch(Exception exc)
             {
-                System.Windows.MessageBox.Show(exc.Message);
                 return text = null;
-            }
-            finally
-            {
-                fs.Close();
             }
         }
     }

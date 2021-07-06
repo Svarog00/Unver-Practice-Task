@@ -46,14 +46,14 @@ namespace PracticeTask
             this.colorChangeButton = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
-            this._graphicCanvas = new WpfGraphic.UserControl1();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.загрузитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.referenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnButton = new System.Windows.Forms.Button();
+            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
+            this._graphicCanvas = new WpfGraphic.UserControl1();
             ((System.ComponentModel.ISupportInitialize)(this.valuesTable)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -66,6 +66,7 @@ namespace PracticeTask
             this.valuesTable.Name = "valuesTable";
             this.valuesTable.Size = new System.Drawing.Size(242, 532);
             this.valuesTable.TabIndex = 0;
+            this.valuesTable.TabStop = false;
             this.valuesTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.valuesTable_CellEndEdit);
             // 
             // buildButton
@@ -74,6 +75,7 @@ namespace PracticeTask
             this.buildButton.Name = "buildButton";
             this.buildButton.Size = new System.Drawing.Size(96, 44);
             this.buildButton.TabIndex = 1;
+            this.buildButton.TabStop = false;
             this.buildButton.Text = "Построить";
             this.buildButton.UseVisualStyleBackColor = true;
             this.buildButton.Click += new System.EventHandler(this.buildButton_Click);
@@ -84,6 +86,7 @@ namespace PracticeTask
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(96, 44);
             this.deleteButton.TabIndex = 2;
+            this.deleteButton.TabStop = false;
             this.deleteButton.Text = "Удалить пару";
             this.deleteButton.UseVisualStyleBackColor = true;
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
@@ -128,8 +131,8 @@ namespace PracticeTask
             this.leftBorderTextBox.Name = "leftBorderTextBox";
             this.leftBorderTextBox.Size = new System.Drawing.Size(100, 20);
             this.leftBorderTextBox.TabIndex = 6;
+            this.leftBorderTextBox.TabStop = false;
             this.leftBorderTextBox.TextChanged += new System.EventHandler(this.leftBorderTextBox_TextChanged);
-            this.leftBorderTextBox.KeyPress += LeftBorderTextBox_KeyPress;
             // 
             // rightBorderTextBox
             // 
@@ -137,8 +140,8 @@ namespace PracticeTask
             this.rightBorderTextBox.Name = "rightBorderTextBox";
             this.rightBorderTextBox.Size = new System.Drawing.Size(100, 20);
             this.rightBorderTextBox.TabIndex = 7;
+            this.rightBorderTextBox.TabStop = false;
             this.rightBorderTextBox.TextChanged += new System.EventHandler(this.rightBorderTextBox_TextChanged);
-            this.rightBorderTextBox.KeyPress += RightBorderTextBox_KeyPress;
             // 
             // borderCheckBox
             // 
@@ -147,6 +150,7 @@ namespace PracticeTask
             this.borderCheckBox.Name = "borderCheckBox";
             this.borderCheckBox.Size = new System.Drawing.Size(164, 17);
             this.borderCheckBox.TabIndex = 8;
+            this.borderCheckBox.TabStop = false;
             this.borderCheckBox.Text = "Использовать промежуток";
             this.borderCheckBox.UseVisualStyleBackColor = true;
             this.borderCheckBox.CheckedChanged += new System.EventHandler(this.borderCheckBox_CheckedChanged);
@@ -194,6 +198,7 @@ namespace PracticeTask
             this.colorChangeButton.Name = "colorChangeButton";
             this.colorChangeButton.Size = new System.Drawing.Size(96, 45);
             this.colorChangeButton.TabIndex = 14;
+            this.colorChangeButton.TabStop = false;
             this.colorChangeButton.Text = "Изменить цвет графика";
             this.colorChangeButton.UseVisualStyleBackColor = true;
             this.colorChangeButton.Click += new System.EventHandler(this.colorChangeButton_Click);
@@ -201,18 +206,6 @@ namespace PracticeTask
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // elementHost1
-            // 
-            this.elementHost1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.elementHost1.Location = new System.Drawing.Point(464, 27);
-            this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(779, 605);
-            this.elementHost1.TabIndex = 13;
-            this.elementHost1.Text = "elementHost1";
-            this.elementHost1.Child = this._graphicCanvas;
             // 
             // menuStrip1
             // 
@@ -261,9 +254,23 @@ namespace PracticeTask
             this.returnButton.Name = "returnButton";
             this.returnButton.Size = new System.Drawing.Size(96, 45);
             this.returnButton.TabIndex = 17;
+            this.returnButton.TabStop = false;
             this.returnButton.Text = "Вернуть график в центр";
             this.returnButton.UseVisualStyleBackColor = true;
             this.returnButton.Click += new System.EventHandler(this.returnButton_Click);
+            // 
+            // elementHost1
+            // 
+            this.elementHost1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.elementHost1.Location = new System.Drawing.Point(464, 27);
+            this.elementHost1.Name = "elementHost1";
+            this.elementHost1.Size = new System.Drawing.Size(779, 605);
+            this.elementHost1.TabIndex = 13;
+            this.elementHost1.TabStop = false;
+            this.elementHost1.Text = "elementHost1";
+            this.elementHost1.Child = this._graphicCanvas;
             // 
             // Form1
             // 

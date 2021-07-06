@@ -58,7 +58,6 @@ namespace PracticeTask
         //Событие вызываемое при изменении значений в таблице
         private void valuesTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            Rebuild();
             CheckXs(e.RowIndex);
         }
 
@@ -105,7 +104,9 @@ namespace PracticeTask
         private void borderCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (rightBorderTextBox.Text.Length > 0 && leftBorderTextBox.Text.Length > 0 && rightBorderTextBox.Text != "-" && leftBorderTextBox.Text != "-")
+            {
                 Rebuild();
+            }
         }
 
         private void colorChangeButton_Click(object sender, EventArgs e)
