@@ -36,30 +36,6 @@ namespace PracticeTask
 					points.Add(new DependentPoint(xi, yi));
 			}
 
-			if(points.Count > 0)
-            {
-				points.Sort();
-
-				#region add until left border
-				while (leftBorder < points[0].X)
-				{
-					points.Add(new DependentPoint(leftBorder, 0));
-					leftBorder++;
-				}
-				#endregion
-				points.Sort();
-
-				#region add until right border
-				int c = points.Count - 1;
-				while (Math.Abs(rightBorder) > Math.Abs(points[c].X))
-				{
-					points.Add(new DependentPoint(rightBorder, 0));
-					rightBorder--;
-				}
-				#endregion
-				points.Sort();
-			}
-
 			return points;
 		}
 	}

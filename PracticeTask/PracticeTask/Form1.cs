@@ -59,6 +59,7 @@ namespace PracticeTask
         private void valuesTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             CheckXs(e.RowIndex);
+            Rebuild();
         }
 
         //Удаление пар значений из таблицы

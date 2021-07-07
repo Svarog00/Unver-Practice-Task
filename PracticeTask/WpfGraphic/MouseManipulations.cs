@@ -43,6 +43,20 @@ namespace WpfGraphic
             public double newY;
         }
 
+        public void SetScale(float scale, double scaleX, double scaleY)
+        {
+            _scale = scale;
+            scaleTransform.ScaleX = scaleX;
+            scaleTransform.ScaleY = scaleY;
+        }
+
+        public void GetScale(out float scale, out double scaleX, out double scaleY)
+        {
+            scale = _scale;
+            scaleX = scaleTransform.ScaleX;
+            scaleY = scaleTransform.ScaleY;
+        }
+
         private void slider_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (_scale + e.Delta / _scrollerK >= 2)
@@ -82,8 +96,8 @@ namespace WpfGraphic
 
             if(_mouseMove)
             {
-                _drawingClass.Xaxis -= (_mousePoint.X - e.GetPosition(canvasForGraph).X) / 50;
-                _drawingClass.Yaxis -= (_mousePoint.Y - e.GetPosition(canvasForGraph).Y)/50;
+                _drawingClass.Xaxis -= (_mousePoint.X - e.GetPosition(canvasForGraph).X) / 10;
+                _drawingClass.Yaxis -= (_mousePoint.Y - e.GetPosition(canvasForGraph).Y) / 10;
                 Draw();
             }
         }

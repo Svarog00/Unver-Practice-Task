@@ -25,7 +25,12 @@ namespace WpfGraphic
 		private double _yAxis;
 		private double _xAxis;
 
+		private double _leftBorder;
+		private double _rightBorder;
+
 		private float _scale;
+
+		private bool _useBorders;
 
 		private Color _graphicColor = Colors.Black;
 
@@ -46,7 +51,7 @@ namespace WpfGraphic
 			get => _points;
         }
 
-		public void SetData(List<DependentPoint> points, byte r, byte g, byte b, bool toCentre = false, double xAxisStart = 0, double yAxisStart = 0)
+		public void SetData(List<DependentPoint> points, byte r, byte g, byte b, bool toCentre = false, bool useBorders = false, double leftBorder = 0, double rightBorder = 0, double xAxisStart = 0, double yAxisStart = 0)
 		{
 			_points = points;
 			_graphicColor = Color.FromRgb(r, g, b);
@@ -55,6 +60,9 @@ namespace WpfGraphic
 				_xAxis = xAxisStart;
 				_yAxis = yAxisStart;
 			}
+			_leftBorder = leftBorder;
+			_rightBorder = rightBorder;
+			_useBorders = useBorders;
 		}
 
 		public void Draw(Canvas canvasToDraw, float scale)
@@ -70,56 +78,159 @@ namespace WpfGraphic
 		private void DrawNet()
 		{
 			double delta = _scale;
-			//Y axis
+			//Y axles
 			double width = 0;
-			while (width < _canvasForGraph.Width)
-			{
-				Line yAxis = new Line();
-				yAxis.Y1 = 0;
-				yAxis.Y2 = _canvasForGraph.Height;
-				yAxis.X1 = _xAxis + width;
-				yAxis.X2 = _xAxis + width;
-				yAxis.Stroke = new SolidColorBrush(Colors.Gray);
-				yAxis.StrokeThickness = 0.25 * (_scale/25);
-				_canvasForGraph.Children.Add(yAxis);
+			Line yAxis;
 
-				yAxis = new Line();
-				yAxis.Y1 = 0;
-				yAxis.Y2 = _canvasForGraph.Height;
-				yAxis.X1 = _xAxis - width;
-				yAxis.X2 = _xAxis - width;
-				yAxis.Stroke = new SolidColorBrush(Colors.Gray);
-				yAxis.StrokeThickness = 0.25 * (_scale / 25);
-				_canvasForGraph.Children.Add(yAxis);
-				width += delta;
+			double xRightShift;
+			double xLeftShift;
+			double yUpShift;
+			double yDownShift;
+
+			#region use borders
+			if (_useBorders)
+            {
+				while (width < _canvasForGraph.Width)
+				{
+					xRightShift = _xAxis + width;
+					xLeftShift = _xAxis - width;
+					//right direction
+					if (width <= _rightBorder * _scale && width >= _leftBorder * _scale)
+					{
+						yAxis = new Line();
+						//
+						yAxis.Y1 = 0;
+						yAxis.Y2 = _canvasForGraph.Height;
+						//
+						yAxis.X1 = xRightShift;
+						yAxis.X2 = xRightShift;
+						yAxis.Stroke = new SolidColorBrush(Colors.Gray);
+						yAxis.StrokeThickness = 0.25 * (_scale / 25);
+						_canvasForGraph.Children.Add(yAxis);
+					}
+
+					//left direction
+					if (-width >= _leftBorder * _scale && -width <= _rightBorder * _scale)
+					{
+						yAxis = new Line();
+						//
+						yAxis.Y1 = 0;
+						yAxis.Y2 = _canvasForGraph.Height;
+						//
+						yAxis.X1 = xLeftShift;
+						yAxis.X2 = xLeftShift;
+						yAxis.Stroke = new SolidColorBrush(Colors.Gray);
+						yAxis.StrokeThickness = 0.25 * (_scale / 25);
+						_canvasForGraph.Children.Add(yAxis);
+					}
+
+					width += delta;
+				}
+				//X axles
+				double height = 0;
+				Line xAxis;
+				while (height < _canvasForGraph.Height)
+				{
+
+					//up direction
+					xAxis = new Line();
+					xAxis.Y1 = _yAxis + height;
+					xAxis.Y2 = _yAxis + height;
+					//
+					xAxis.X1 = _xAxis + _leftBorder * _scale;
+					xAxis.X2 = _xAxis + _rightBorder * _scale;
+					//
+					xAxis.Stroke = new SolidColorBrush(Colors.Gray);
+					xAxis.StrokeThickness = 0.25 * (_scale / 25);
+					_canvasForGraph.Children.Add(xAxis);
+
+					//down direction
+					xAxis = new Line();
+					xAxis.Y1 = _yAxis - height;
+					xAxis.Y2 = _yAxis - height;
+					//
+					xAxis.X1 = _xAxis + _leftBorder * _scale;
+					xAxis.X2 = _xAxis + _rightBorder * _scale;
+					//
+					xAxis.Stroke = new SolidColorBrush(Colors.Gray);
+					xAxis.StrokeThickness = 0.25 * (_scale / 25);
+					_canvasForGraph.Children.Add(xAxis);
+
+					height += delta;
+				}
 			}
-			//X axis
-			double height = 0;
-			while (height < _canvasForGraph.Height)
-			{
-				Line xAxis = new Line();
-				xAxis.Y1 = _yAxis + height;
-				xAxis.Y2 = _yAxis + height;
-				xAxis.X1 = 0;
-				xAxis.X2 = _canvasForGraph.Width;
-				xAxis.Stroke = new SolidColorBrush(Colors.Gray);
-				xAxis.StrokeThickness = 0.25 * (_scale / 25);
-				_canvasForGraph.Children.Add(xAxis);
+			#endregion
 
-				xAxis = new Line();
-				xAxis.Y1 = _yAxis - height;
-				xAxis.Y2 = _yAxis - height;
-				xAxis.X1 = 0;
-				xAxis.X2 = _canvasForGraph.Width;
-				xAxis.Stroke = new SolidColorBrush(Colors.Gray);
-				xAxis.StrokeThickness = 0.25 * (_scale / 25);
-				_canvasForGraph.Children.Add(xAxis);
+			#region dont use borders
+			else
+            {
+				while (width < _canvasForGraph.Width)
+				{
+					xRightShift = _xAxis + width;
+					xLeftShift = _xAxis - width;
 
-				height += delta;
+					yAxis = new Line();
+					//
+					yAxis.Y1 = 0;
+					yAxis.Y2 = _canvasForGraph.Height;
+					//
+					yAxis.X1 = xRightShift;
+					yAxis.X2 = xRightShift;
+					yAxis.Stroke = new SolidColorBrush(Colors.Gray);
+					yAxis.StrokeThickness = 0.25 * (_scale / 25);
+					_canvasForGraph.Children.Add(yAxis);
+
+					yAxis = new Line();
+					//
+					yAxis.Y1 = 0;
+					yAxis.Y2 = _canvasForGraph.Height;
+					//
+					yAxis.X1 = xLeftShift;
+					yAxis.X2 = xLeftShift;
+					yAxis.Stroke = new SolidColorBrush(Colors.Gray);
+					yAxis.StrokeThickness = 0.25 * (_scale / 25);
+					_canvasForGraph.Children.Add(yAxis);
+
+					width += delta;
+				}
+
+				double height = 0;
+				Line xAxis;
+				while (height < _canvasForGraph.Height)
+				{
+					yUpShift = _yAxis + height;
+					yDownShift = _yAxis - height;
+
+					xAxis = new Line();
+					xAxis.Y1 = yUpShift;
+					xAxis.Y2 = yUpShift;
+					//
+					xAxis.X1 = 0;
+					xAxis.X2 = _canvasForGraph.Width;
+					//
+					xAxis.Stroke = new SolidColorBrush(Colors.Gray);
+					xAxis.StrokeThickness = 0.25 * (_scale / 25);
+					_canvasForGraph.Children.Add(xAxis);
+
+					xAxis = new Line();
+					xAxis.Y1 = yDownShift;
+					xAxis.Y2 = yDownShift;
+					//
+					xAxis.X1 = 0;
+					xAxis.X2 = _canvasForGraph.Width;
+					//
+					xAxis.Stroke = new SolidColorBrush(Colors.Gray);
+					xAxis.StrokeThickness = 0.25 * (_scale / 25);
+					_canvasForGraph.Children.Add(xAxis);
+
+					height += delta;
+				}
 			}
+			#endregion
+
 		}
 
-		private void DrawAxles()
+        private void DrawAxles()
 		{
 			//Y axis
 			Line yAxis = new Line();

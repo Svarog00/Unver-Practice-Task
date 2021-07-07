@@ -37,9 +37,9 @@ namespace WpfGraphic
             _drawingClass = new DrawingClass();
         }
 
-        public void SetData(List<DependentPoint> points, byte r, byte g, byte b, bool toCentre = false)
+        public void SetData(List<DependentPoint> points, byte r, byte g, byte b, double leftBorder, double rightBorder, bool useBorders = false, bool toCentre = false)
         {
-            _drawingClass.SetData(points, r, g, b, toCentre, _xAxisStart, _yAxisStart);
+            _drawingClass.SetData(points, r, g, b, toCentre, useBorders, leftBorder, rightBorder, _xAxisStart, _yAxisStart);
         }
 
         public void Draw()

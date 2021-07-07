@@ -19,6 +19,11 @@ namespace PracticeTask
         double _leftBorder;
         double _rightBorder;
 
+        //Canvas scale
+        float _scale;
+        double _scaleX;
+        double _scaleY;
+
         public List<DependentPoint> Points
         {
             get => _points;
@@ -54,12 +59,27 @@ namespace PracticeTask
             get => _rightBorder;
         }
 
+        public float Scale
+        {
+            get => _scale;
+        }
+
+        public double ScaleX
+        {
+            get => _scaleX;
+        }
+
+        public double ScaleY
+        {
+            get => _scaleY;
+        }
+
         public SavedData()
         {
 
         }
 
-        public SavedData(List<DependentPoint> points, byte r, byte g, byte b, bool useBorders, double leftBorder, double rightBorder)
+        public SavedData(List<DependentPoint> points, byte r, byte g, byte b, bool useBorders, double leftBorder, double rightBorder, float scale, double scaleX, double scaleY)
         {
             _points = points;
             _r = r;
@@ -68,6 +88,10 @@ namespace PracticeTask
             _useBorders = useBorders;
             _leftBorder = leftBorder;
             _rightBorder = rightBorder;
+
+            _scale = scale;
+            _scaleX = scaleX;
+            _scaleY = scaleY;
         }
     }
 

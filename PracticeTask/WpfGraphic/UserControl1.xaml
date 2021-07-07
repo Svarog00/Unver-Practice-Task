@@ -10,7 +10,9 @@
         <ScrollViewer Name="scroll" CanContentScroll="True" HorizontalScrollBarVisibility="Visible"  VerticalScrollBarVisibility="Visible">
             <Canvas x:Name="canvasForGraph" HorizontalAlignment="Center" Height="541" VerticalAlignment="Center" Width="800" Background="#FFFF" Margin="0,18,0,0">
                 <Canvas.LayoutTransform>
-                    <ScaleTransform ScaleX="{Binding Value, ElementName=slider}" 
+                    <ScaleTransform 
+                                    x:Name="scaleTransform"
+                                    ScaleX="{Binding Value, ElementName=slider}" 
                                     ScaleY="{Binding ScaleX, RelativeSource={RelativeSource Self}}"/>
                 </Canvas.LayoutTransform>
             </Canvas>
