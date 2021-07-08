@@ -96,8 +96,8 @@ namespace WpfGraphic
 
             if(_mouseMove)
             {
-                _drawingClass.Xaxis -= (_mousePoint.X - e.GetPosition(canvasForGraph).X) / 10;
-                _drawingClass.Yaxis -= (_mousePoint.Y - e.GetPosition(canvasForGraph).Y) / 10;
+                _drawingClass.Xaxis -= (_mousePoint.X - e.GetPosition(canvasForGraph).X) / 20;
+                _drawingClass.Yaxis -= (_mousePoint.Y - e.GetPosition(canvasForGraph).Y) / 20;
                 Draw();
             }
         }

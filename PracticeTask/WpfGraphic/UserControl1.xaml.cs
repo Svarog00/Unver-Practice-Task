@@ -32,7 +32,7 @@ namespace WpfGraphic
             InitializeComponent();
             _yAxisStart = canvasForGraph.Height / 2;
             _xAxisStart = canvasForGraph.Width / 2;
-            _scale = 10;
+            _scale = 20;
 
             _drawingClass = new DrawingClass();
         }
